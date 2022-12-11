@@ -3,7 +3,7 @@
 .movie-item{
     position: relative;
     display: block;
-    min-height: 300px;
+    min-height: 325px;
     background-repeat: 5px;
     background-color: $bgColorLight;
     border-radius: 7px;
@@ -33,6 +33,7 @@
     }
 
     &-title{
+        text-align: center;
         font-weight: bold;
         margin: 5px;
     }
