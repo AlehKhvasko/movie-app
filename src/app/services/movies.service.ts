@@ -77,9 +77,10 @@ export class MoviesService {
       );
   }
 
-  searchMovies(page: number) {
+  searchMovies(page: number, searchValue?: string) {
+    const uri = searchValue ? '/search/movie' : '/movie/popular';
     return this.http
-      .get<MovieDto>(`${this.baseUrl}/movie/popular?page=${page}&api_key=${this.apiKey}`)
+      .get<MovieDto>(`${this.baseUrl}${uri}?page=${page}&query=${searchValue}&api_key=${this.apiKey}`)
       .pipe(
         switchMap((res) => {
           return of(res.results);
@@ -88,7 +89,8 @@ export class MoviesService {
   }
 
   getTvs(type: string = 'latest', count: number = 12) {
-    return this.http.get<TvDto>(`${this.baseUrl}/tv/${type}?api_key=${this.apiKey}`).pipe(
+    return this.http.get<TvDto>(`${this.baseUrl}/tv/${type}?api_key=${this.apiKey}`)
+    .pipe(
       switchMap((res) => {
         return of(res.results.slice(0, count));
       })
